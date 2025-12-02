@@ -1,16 +1,22 @@
-import React from "react";
-import { ActivityIndicator, StyleProp, Text, TouchableOpacity, ViewStyle } from "react-native";
-import { SvgProps } from "react-native-svg";
+import React, { memo } from "react";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import tw from "./tailwind";
 
 // Define variant styles
 const variants = {
   default: tw`bg-primary`,
   destructive: tw`bg-red-600`,
-  outline: tw`border border-gray-300`,
-  secondary: tw`bg-gray-200`,
-  ghost: tw`bg-transparent`,
+  success: tw`bg-[#218838]`,
+  secondary: tw`bg-[#D9D9D9]`,
   link: tw`bg-transparent`,
+};
+
+const textColors = {
+  default: tw`text-foreground`,
+  destructive: tw`text-white`,
+  success: tw`text-white`,
+  secondary: tw`text-black`,
+  link: tw`text-[#3D3D3D]`,
 };
 
 // Define size styles
@@ -29,27 +35,25 @@ type Size = keyof typeof sizes;
 interface ButtonProps {
   variant?: Variant;
   size?: Size;
-  style?: StyleProp<ViewStyle>;
+  style?: any;
+  textStyle?: any;
   children?: React.ReactNode;
   onPress?: () => void;
   disabled?: boolean;
   isLoading?: boolean;
-  icon?: boolean;
-  svg?: React.FC<SvgProps>;
-  svgProps?: SvgProps;
+  label?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+const ButtonComponent: React.FC<ButtonProps> = ({
   variant = "default",
   size = "default",
   style,
+  textStyle,
   children,
   onPress,
   disabled = false,
   isLoading = false,
-  icon = false,
-  svg: SvgComponent,
-  svgProps,
+  label,
 }) => {
   const isButtonDisabled = disabled || isLoading;
 
@@ -57,7 +61,6 @@ export const Button: React.FC<ButtonProps> = ({
     <TouchableOpacity
       onPress={onPress}
       disabled={isButtonDisabled}
-      // activeOpacity={0.7}
       style={[
         tw`flex-row items-center justify-center rounded-md`,
         variants[variant],
@@ -67,9 +70,15 @@ export const Button: React.FC<ButtonProps> = ({
       ]}
     >
       {isLoading && <ActivityIndicator color="#fff" style={tw`mr-2`} />}
-      {children && <Text style={tw`text-white text-sm`}>{children}</Text>}
-      {icon && SvgComponent && <SvgComponent {...svgProps} style={tw`ml-2`} />}
-      {/* {icon && !SvgComponent && <ArrowRightIcon style={tw`ml-2`} />} */}
+      {label ? (
+        <Text style={[tw`font-medium`, textColors[variant], textStyle]}>
+          {label}
+        </Text>
+      ) : (
+        children
+      )}
     </TouchableOpacity>
   );
 };
+
+export const Button = memo(ButtonComponent);
