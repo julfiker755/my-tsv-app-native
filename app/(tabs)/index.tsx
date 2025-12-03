@@ -1,20 +1,17 @@
-import { Button } from "@/lib";
 import tw from "@/lib/tailwind";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View>
-      <Text style={tw`text-3xl`}>HomeScreen</Text>
-      {/* <Button onPress={() => console.log("press")}>
-        <Text style={{ color: "white" }}>Submit</Text>
-      </Button> */}
-      <Button label="Julfikerr"   variant="success"  />
+    <View style={tw`p-2 flex-1` }>
+      
+   
+     <View style={tw`w-full flex-row gap-3`}>
+      <View style={tw`border flex-1 h-20`}></View>
+      <View style={tw`border flex-1 h-20`}></View>
 
-      {/* <View style={tw`bg-primary mt-10 [&>text]:text-[red] text-white p-2 rounded-md`}>
-        <Text>Julfiker</Text>
-     </View> */}
+     </View>
     </View>
   );
 }
