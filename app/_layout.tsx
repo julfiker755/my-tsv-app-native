@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import "react-native-reanimated";
 import {
   SafeAreaView,
@@ -9,7 +10,7 @@ import {
 import tw from "../lib/tailwind";
 
 export const unstable_settings = {
-  anchor: "(tabs)",
+  initialRouteName: "index",
 };
 
 export default function RootLayout() {
@@ -20,14 +21,18 @@ export default function RootLayout() {
       <SafeAreaView
         style={[tw`flex-1`, { paddingTop: top, paddingBottom: bottom }]}
       >
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="modal"
-            options={{ presentation: "modal", title: "Modal" }}
-          />
-        </Stack>
-        <StatusBar style="auto" />
+        <KeyboardProvider>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              statusBarAnimation: "fade",
+              statusBarStyle: "light",
+            }}
+          >
+            <Stack.Screen name="index"  />
+          </Stack>
+          <StatusBar style="auto" />
+        </KeyboardProvider>
       </SafeAreaView>
     </GestureHandlerRootView>
   );
