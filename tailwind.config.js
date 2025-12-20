@@ -33,7 +33,7 @@ module.exports = {
       },
       colors: {
         primary: "#EF4444",
-        foreground: "#3D3D3D",
+        foreground: "#000000",
       },
     },
   },
