@@ -1,6 +1,6 @@
 import tw from "@/lib/tailwind";
 import { FormikProps } from "formik";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Animated,
   Text,
@@ -30,8 +30,6 @@ export function FormInput({
   placeholder,
   secure = false,
   leftIcon,
-  rightIcon,
-  rightIconOff,
   containerStyle,
   inputProps,
 }: FormikInputProps) {
@@ -43,23 +41,6 @@ export function FormInput({
   const error = formik.errors[name];
   const touched = formik.touched[name];
 
-  useEffect(() => {
-    Animated.timing(animated, {
-      toValue: value ? -24 : 0,
-      duration: 180,
-      useNativeDriver: true,
-    }).start();
-  }, [value]);
-
-  const translateX = animated.interpolate({
-    inputRange: [-24, 0],
-    outputRange: [16, 40],
-  });
-
-  const scale = animated.interpolate({
-    inputRange: [-24, 0],
-    outputRange: [0.8, 1],
-  });
 
   return (
     <View style={containerStyle}>
@@ -73,30 +54,13 @@ export function FormInput({
       >
         {leftIcon && <SvgXml xml={leftIcon} />}
 
-        {placeholder && (
-          <Animated.Text
-            style={[
-              tw`absolute bg-base px-2 text-gray-400`,
-              {
-                transform: [
-                  { translateY: animated },
-                  { translateX },
-                  { scale },
-                ],
-              },
-            ]}
-          >
-            {placeholder}
-          </Animated.Text>
-        )}
-
         <TextInput
           ref={inputRef}
           value={value}
           secureTextEntry={secure && !showPassword}
           onChangeText={formik.handleChange(name)}
           onBlur={formik.handleBlur(name)}
-          style={tw`flex-1 px-2 text-white`}
+          style={tw`flex-1 px-2 bg-input text-input_foreground text-white`}
           {...inputProps}
         />
 
@@ -115,3 +79,44 @@ export function FormInput({
     </View>
   );
 }
+
+
+
+// import { Button, FormInput } from "@/lib";
+// import tw from "@/lib/tailwind";
+// import { Formik } from "formik";
+// import { View } from "react-native";
+
+// export default function Index() {
+//   const handleRegister = async (values: any) => {
+//     console.log(values);
+//   };
+
+//   return (
+//     <View>
+//       <Formik
+//         initialValues={{ email: "", password: "" }}
+//         onSubmit={handleRegister}
+//       >
+//         {(formik) => (
+//           <View style={tw`gap-5`}>
+//             <FormInput
+//               name="email"
+//               formik={formik}
+//               placeholder="Email"
+//             />
+
+//             <FormInput
+//               name="password"
+//               formik={formik}
+//               placeholder="Password"
+//               secure
+//             />
+
+//             <Button label="Submit" onPress={formik.handleSubmit}/>
+//           </View>
+//         )}
+//       </Formik>
+//     </View>
+//   );
+// }
