@@ -71,7 +71,13 @@ const ButtonComponent: React.FC<ButtonProps> = ({
     >
       {isLoading && <ActivityIndicator color="#fff" style={tw`mr-2`} />}
       {label ? (
-        <Text style={[tw`font-medium`, textColors[variant], textStyle]}>
+        <Text
+          style={[
+            tw`font-medium text-foreground`,
+            textColors[variant],
+            textStyle,
+          ]}
+        >
           {label}
         </Text>
       ) : (

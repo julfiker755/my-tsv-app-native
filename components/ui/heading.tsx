@@ -22,7 +22,11 @@ const HeadingComponent: React.FC<HeadingProps> = ({
   style,
   children,
 }) => {
-  return <Text style={[variants[variant], style]}>{children}</Text>;
+  return (
+    <Text style={[tw`text-foreground`, variants[variant], style]}>
+      {children}
+    </Text>
+  );
 };
 
 export const Heading = memo(HeadingComponent);

@@ -33,9 +33,9 @@ module.exports = {
       },
       colors: {
         primary: "#e21220",
-        foreground: "#000000",
-        input: "#F8F8F8",
-        input_foreground: "#D2D2D2",
+        foreground: "#ffffff",
+        input: "#1f222b",
+        input_foreground: "#a0a09e",
       },
     },
   },

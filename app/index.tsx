@@ -1,6 +1,6 @@
 import { assets } from "@/assets";
-import { Button, Heading } from "@/lib";
-import tw from "@/lib/tailwind";
+import { Button, Heading } from "@/components/ui";
+import tw from "@/components/ui/tailwind";
 import { Link } from "expo-router";
 import { ImageBackground, StatusBar, Text, View } from "react-native";
 
