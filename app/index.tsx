@@ -1,26 +1,47 @@
-import { Img } from "@/lib/Img";
-import { View } from "react-native";
+import { assets } from "@/assets";
+import { Button, Heading } from "@/lib";
+import tw from "@/lib/tailwind";
+import { Link } from "expo-router";
+import { ImageBackground, StatusBar, Text, View } from "react-native";
 
 export default function Index() {
-  
-
   return (
-    <View>
-      <Img type="href" source={"https://plus.unsplash.com/premium_photo-1760028215121-0cb0f3b99fca?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}/>
-      <Img type="local" source={require("../assets/shop_bug.png")}/>
-       {/* <Image
-        source={require('../assets/shop_bug.png')} 
-        style={{ width: 200, height: 200 }}  
-       
-      />
-       <Image
-        source={{
-          uri:"https://plus.unsplash.com/premium_photo-1760028215121-0cb0f3b99fca?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        }} 
-        // style={{ width: 200, height: 200 }}  
-        style={tw`w-20 h-20`}
-  
-      /> */}
-    </View>
+    <>
+      <StatusBar barStyle="light-content" />
+      <ImageBackground
+        source={assets.bg}
+        resizeMode="cover"
+        style={tw`flex-1 justify-end`}
+      >
+        <View style={tw`absolute inset-0 bg-black/5`} />
+
+        <View style={tw`px-6 pb-10`}>
+          <Heading variant="h1" style={tw`text-center text-white`}>
+            Welcome to Mova
+          </Heading>
+
+          <Heading style={tw`text-center text-white mt-3`}>
+            The best movie streaming app of the century{"\n"}
+            to make your days great!
+          </Heading>
+
+          <View style={tw`flex-row justify-center mt-5`}>
+            {[0, 1, 2].map((_, idx) => (
+              <View
+                key={idx}
+                style={tw`w-2 h-2 rounded-full ${idx === 1 ? "bg-primary w-6" : "bg-gray-400"} mx-1`}
+              />
+            ))}
+          </View>
+          <Link style={tw`mt-5`} href={"/(auth)/login"} asChild>
+            <Button style={tw`rounded-full w-full h-12`}>
+              <Text style={tw`text-lg text-white font-semibold`}>
+                Get Started
+              </Text>
+            </Button>
+          </Link>
+        </View>
+      </ImageBackground>
+    </>
   );
 }

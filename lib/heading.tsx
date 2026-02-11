@@ -2,10 +2,9 @@ import React, { memo } from "react";
 import { Text } from "react-native";
 import tw from "./tailwind";
 
-
 const variants = {
-  h1: tw`text-2xl font-bold`,
-  h2: tw`text-xl font-bold`,
+  h1: tw`text-3xl font-bold`,
+  h2: tw`text-2xl font-bold`,
   h3: tw`text-lg font-bold`,
   p: tw`text-base`,
 } as const;
@@ -15,7 +14,7 @@ type Variant = keyof typeof variants;
 interface HeadingProps {
   variant?: Variant;
   style?: any;
-  children:any;
+  children: any;
 }
 
 const HeadingComponent: React.FC<HeadingProps> = ({

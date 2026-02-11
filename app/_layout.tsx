@@ -29,7 +29,7 @@ export default function RootLayout() {
               statusBarStyle: "light",
             }}
           >
-            <Stack.Screen name="index"  />
+            <Stack.Screen name="index" />
           </Stack>
           <StatusBar style="auto" />
         </KeyboardProvider>

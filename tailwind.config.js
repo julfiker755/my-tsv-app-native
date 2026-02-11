@@ -32,10 +32,10 @@ module.exports = {
         // You can replace 'YourCustomFont' with your desired font
       },
       colors: {
-        primary: "#EF4444",
+        primary: "#e21220",
         foreground: "#000000",
-        input:"#F8F8F8",
-        input_foreground:"#D2D2D2"
+        input: "#F8F8F8",
+        input_foreground: "#D2D2D2",
       },
     },
   },
