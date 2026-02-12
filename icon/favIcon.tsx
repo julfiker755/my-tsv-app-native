@@ -15,22 +15,15 @@ interface FavIconProps {
 
 const FavIcon: React.FC<FavIconProps> = ({
   name,
-  width,
-  height,
+  width = 20,
+  height = 20,
   color,
 }) => {
   const xml = icons[name];
 
   if (!xml) return null;
 
-  return (
-    <SvgXml
-      xml={xml}
-      width={width}
-      height={height}
-      fill={color}
-    />
-  );
+  return <SvgXml xml={xml} width={width} height={height} fill={color} />;
 };
 
 export default React.memo(FavIcon);

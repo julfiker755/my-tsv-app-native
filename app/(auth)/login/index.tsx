@@ -1,15 +1,21 @@
 import { assets } from "@/assets";
 import { getInit } from "@/components/lib";
 import { Login_sc } from "@/components/schema";
-import { Button, FormInput, Heading } from "@/components/ui";
+import { Box, Button, Divider, FormInput, Heading } from "@/components/ui";
 import tw from "@/components/ui/tailwind";
+import FavIcon from "@/icon/favIcon";
+import { Checkbox } from "expo-checkbox";
+import { Link } from "expo-router";
 import { Formik } from "formik";
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 export default function Login() {
-  const handlesubmit = (values: any) => {
+  const handlesubmit = (values: any, { resetForm }: any) => {
     console.log("Login Attempt:", values);
+    setTimeout(() => {
+      resetForm();
+    }, 2000);
   };
 
   return (
@@ -30,30 +36,58 @@ export default function Login() {
         onSubmit={handlesubmit}
       >
         {(formik) => (
-          <View style={tw`w-full gap-4`}>
-            <FormInput
-              name="email"
-              formik={formik}
-              placeholder="Email"
-              // leftIcon="email"
-            />
+          <>
+            <View style={tw`w-full gap-3`}>
+              <FormInput
+                name="email"
+                formik={formik}
+                placeholder="Email"
+                icon={<FavIcon name="email" />}
+              />
 
-            <FormInput
-              name="password"
-              formik={formik}
-              placeholder="Password"
-              // leftIcon="lock"
-              secure
-            />
+              <FormInput
+                name="password"
+                formik={formik}
+                placeholder="Password"
+                icon={<FavIcon name="password" />}
+                secure
+              />
+              <View style={tw`flex-row justify-between items-center`}>
+                <View style={tw`flex-row items-center`}>
+                  <Checkbox
+                    style={tw`w-4 h-4 border border-input_foreground`}
+                  />
+                  <Text style={tw`text-sm text-white ml-1`}>Remember me</Text>
+                </View>
 
-            <Button
-              label="Sign in"
-              style={tw`rounded-full h-11`}
-              onPress={formik.handleSubmit}
-            ></Button>
-          </View>
+                <Link href={`/(auth)/forgot-pass`} asChild>
+                  <Text style={tw`text-sm text-white underline`}>
+                    Forgot Password?
+                  </Text>
+                </Link>
+              </View>
+
+              <Button
+                label="Sign in"
+                style={tw`rounded-full h-11`}
+                onPress={formik.handleSubmit}
+              />
+            </View>
+          </>
         )}
       </Formik>
+      <Divider>or continue with</Divider>
+      <Box style={tw`mx-auto bg-input border rounded-full`}>
+        <FavIcon name="google" />
+      </Box>
+      <View style={tw`flex-row justify-center items-center mt-6`}>
+        <Text style={tw`text-base text-white mr-1`}>
+          Don&apos;t have an account ?
+        </Text>
+        <Link href={`/(auth)/register`} asChild>
+          <Text style={tw`text-base text-primary underline`}>Sign up</Text>
+        </Link>
+      </View>
     </View>
   );
 }
