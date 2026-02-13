@@ -22,7 +22,7 @@ export default function SignUp() {
       <Image source={assets.logo} style={tw`w-20 h-20 mx-auto`} />
 
       <Heading variant="h1" style={tw`mt-2 mb-1 mx-auto`}>
-        MovieZone
+        Movexa
       </Heading>
 
       <Heading variant="p" style={tw`mx-auto mb-6`}>

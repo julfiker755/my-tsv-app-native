@@ -5,17 +5,21 @@ import { Box, Button, Divider, FormInput, Heading } from "@/components/ui";
 import tw from "@/components/ui/tailwind";
 import FavIcon from "@/icon/favIcon";
 import { Checkbox } from "expo-checkbox";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { Formik } from "formik";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
 export default function Login() {
+  const router = useRouter();
   const handlesubmit = (values: any, { resetForm }: any) => {
     console.log("Login Attempt:", values);
-    setTimeout(() => {
-      resetForm();
-    }, 2000);
+
+    router.push("/(tabs)/home");
+
+    // setTimeout(() => {
+    //   resetForm();
+    // }, 2000);
   };
 
   return (
@@ -23,7 +27,7 @@ export default function Login() {
       <Image source={assets.logo} style={tw`w-20 h-20 mx-auto`} />
 
       <Heading variant="h1" style={tw`mt-2 mb-1 mx-auto`}>
-        MovieZone
+        Movexa
       </Heading>
 
       <Heading variant="p" style={tw`mx-auto mb-6`}>
@@ -32,7 +36,7 @@ export default function Login() {
 
       <Formik
         initialValues={getInit(Login_sc)}
-        validationSchema={Login_sc}
+        // validationSchema={Login_sc}
         onSubmit={handlesubmit}
       >
         {(formik) => (
