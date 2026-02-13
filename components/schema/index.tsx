@@ -33,3 +33,12 @@ export const otp_sc = Yup.object().shape({
     .length(4, `OTP must be 4 digits`)
     .required("OTP is required"),
 });
+
+export const change_sc = Yup.object().shape({
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  c_password: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords do not match")
+    .required("Confirm password is required"),
+});
