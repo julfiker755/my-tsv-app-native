@@ -1,8 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
+  FlatList
 } from "react-native";
 
 interface AutoSliderCarouselProps<T> {
@@ -21,44 +19,50 @@ export function AutoSliderCarousel<T>({
   interval = 3000,
 }: AutoSliderCarouselProps<T>) {
   const listRef = useRef<FlatList<T>>(null);
+  const [carouselData, setCarouselData] = useState<T[]>(data);
   const [index, setIndex] = useState(0);
 
-  const infiniteData = useMemo(() => [...data, ...data], [data]);
-
   useEffect(() => {
-    if (!data || data.length === 0) return;
+    if (!data?.length) return;
 
-    const scrollNext = () => {
-      let nextIndex = index + 1;
+    const timer = setInterval(() => {
+      const nextIndex = index + 1;
 
-      if (nextIndex >= infiniteData.length) {
-        listRef.current?.scrollToOffset({ offset: 0, animated: false });
-        nextIndex = 1;
+      // 🔥 যদি শেষের কাছে চলে যায় → নতুন করে data clone করবো
+      if (nextIndex >= carouselData.length - 2) {
+        setCarouselData((prev) => [...prev, ...data]);
       }
 
-      listRef.current?.scrollToIndex({ index: nextIndex, animated: true });
-      setIndex(nextIndex);
-    };
+      listRef.current?.scrollToIndex({
+        index: nextIndex,
+        animated: true,
+      });
 
-    const timer = setInterval(scrollNext, interval);
+      setIndex(nextIndex);
+    }, interval);
+
     return () => clearInterval(timer);
-  }, [index, infiniteData, interval, data]);
+  }, [index, interval, carouselData.length, data]);
 
   return (
     <FlatList
       ref={listRef}
-      data={infiniteData}
+      data={carouselData}
       horizontal
       renderItem={renderItem}
       keyExtractor={(item, idx) => `${keyExtractor(item, idx)}-${idx}`}
       showsHorizontalScrollIndicator={false}
       snapToInterval={itemWidth}
       decelerationRate="fast"
-      onMomentumScrollEnd={(e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      getItemLayout={(_, index) => ({
+        length: itemWidth,
+        offset: itemWidth * index,
+        index,
+      })}
+      onMomentumScrollEnd={(e) => {
         const newIndex = Math.round(e.nativeEvent.contentOffset.x / itemWidth);
         setIndex(newIndex);
       }}
-      onScrollToIndexFailed={() => {}}
     />
   );
 }

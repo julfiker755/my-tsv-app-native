@@ -5,10 +5,19 @@ import { MovieCard } from "@/components/reuseable/move-card";
 import { Button } from "@/components/ui";
 import tw from "@/components/ui/tailwind";
 import FavIcon from "@/icon/favIcon";
+import { useRouter } from "expo-router";
 import React from "react";
-import { Image, ImageBackground, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <ScrollView style={tw`flex-1`} showsVerticalScrollIndicator={false}>
       <View style={tw`flex-1`}>
@@ -42,9 +51,20 @@ export default function Home() {
           </View>
         </ImageBackground>
         <View style={tw`px-4`}>
-          <View style={tw`flex-row justify-between my-3`}>
+          <View style={tw`flex-row justify-between mb-3 mt-4`}>
             <Text style={tw`text-white text-lg`}>Top 10 Movies This Week</Text>
-            <Text style={tw`text-primary text-lg`}>See all</Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                router.push({
+                  pathname: "/(common)/all",
+                  params: { status: "top" },
+                });
+              }}
+              style={tw`z-10`}
+            >
+              <Text style={tw`text-primary text-lg`}>See all</Text>
+            </TouchableOpacity>
           </View>
           <AutoSliderCarousel
             data={movies}
@@ -54,10 +74,21 @@ export default function Home() {
             interval={3000}
           />
         </View>
-        <View style={tw`px-4`}>
+        <View style={tw`px-4 mt-3`}>
           <View style={tw`flex-row justify-between my-3`}>
             <Text style={tw`text-white text-lg`}>New Releases</Text>
-            <Text style={tw`text-primary text-lg`}>See all</Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                router.push({
+                  pathname: "/(common)/all",
+                  params: { status: "top" },
+                });
+              }}
+              style={tw`z-10`}
+            >
+              <Text style={tw`text-primary text-lg`}>See all</Text>
+            </TouchableOpacity>
           </View>
           <AutoSliderCarousel
             data={movies}
@@ -67,10 +98,21 @@ export default function Home() {
             interval={3000}
           />
         </View>
-        <View style={tw`px-4 mb-10`}>
+        <View style={tw`px-4 mb-10 mt-3`}>
           <View style={tw`flex-row justify-between my-3`}>
             <Text style={tw`text-white text-lg`}>All Movie</Text>
-            <Text style={tw`text-primary text-lg`}>See all</Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                router.push({
+                  pathname: "/(common)/all",
+                  params: { status: "all" },
+                });
+              }}
+              style={tw`z-10`}
+            >
+              <Text style={tw`text-primary text-lg`}>See all</Text>
+            </TouchableOpacity>
           </View>
           <AutoSliderCarousel
             data={movies}
