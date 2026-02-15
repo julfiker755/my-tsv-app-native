@@ -5,7 +5,7 @@ import { MovieCard } from "@/components/reuseable/move-card";
 import { Button } from "@/components/ui";
 import tw from "@/components/ui/tailwind";
 import FavIcon from "@/icon/favIcon";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -30,8 +30,12 @@ export default function Home() {
             <View style={tw`flex-row justify-between items-center`}>
               <Image style={tw`w-7 h-7`} source={assets.logo} />
               <View style={tw`flex-row gap-x-3`}>
-                <FavIcon name="search" />
-                <FavIcon name="noti" />
+                <Link href={"/(tabs)/explore"}>
+                  <FavIcon name="search" />
+                </Link>
+                <Link href={"/(common)/notification"}>
+                  <FavIcon name="noti" />
+                </Link>
               </View>
             </View>
           </View>

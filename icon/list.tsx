@@ -80,4 +80,19 @@ export const favIcon = {
 </defs>
 </svg>
 `,
+  search_gray: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_27_72)">
+<path d="M24.75 24.75L18.9594 18.9594M18.9594 18.9594C19.9499 17.9689 20.7356 16.793 21.2717 15.4988C21.8077 14.2047 22.0836 12.8176 22.0836 11.4168C22.0836 10.016 21.8077 8.62896 21.2717 7.3348C20.7356 6.04065 19.9499 4.86475 18.9594 3.87424C17.9689 2.88373 16.793 2.09802 15.4988 1.56196C14.2047 1.02591 12.8176 0.75 11.4168 0.75C10.016 0.75 8.62896 1.02591 7.3348 1.56196C6.04065 2.09802 4.86474 2.88373 3.87424 3.87424C1.87382 5.87466 0.75 8.5878 0.75 11.4168C0.75 14.2458 1.87382 16.959 3.87424 18.9594C5.87466 20.9598 8.5878 22.0836 11.4168 22.0836C14.2458 22.0836 16.959 20.9598 18.9594 18.9594Z" stroke="#6B7281" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_27_72">
+<rect width="26" height="26" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+`,
+  s_apply: `<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 6H19.5M3 11.25H11.25M3 16.5H19.5" stroke="#6B7281" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
 } as const;
